@@ -44,6 +44,27 @@ This document outlines the architecture and build plan for the Mac desktop appli
 - Milestone 2: Implement core bridge for authentication state sharing and API access.
 - Milestone 3: Build, sign, notarize, and generate DMG; publish to distribution channel.
 
+## 10. Appendix: Tauri Config Skeleton
+```json
+// apps/mac-app/src-tauri/tauri.conf.json
+{
+  "build": { "distDir": "../dist", "devPath": "../" },
+  "package": { "productName": "OMCODE", "version": "0.1.0" },
+  "tauri": {
+    "allowlist": { "all": false, "shell": { "all": false } },
+    "bundle": { "active": true, "targets": ["dmg"], "identifier": "com.omdala.omcode" }
+  }
+}
+```
+## 11. Appendix: CI Signing Script (Sample)
+```bash
+# .github/workflows/mac-build.yml
+- name: Sign App
+  run: |
+    security import ./certs/apple.p12 -k ~/Library/Keychains/login.keychain-db -P $CERT_PASSWORD
+    codesign -s "Developer ID Application: OMDALA (TEAMID)" --deep --force ./target/release/bundle/macos/OMCODE.app
+    xcrun notarytool submit ./target/release/bundle/macos/OMCODE.app --keychain-profile "AC_PROFILE" --wait
+```
 ---
 
 Owner: [Your Name / Team]

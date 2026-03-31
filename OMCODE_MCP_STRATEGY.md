@@ -32,6 +32,15 @@ This document outlines the MCP (Middleware Control Plane) strategy for integrati
 - Milestone 2: Basic Cursor integration and example automation.
 - Milestone 3: End-to-end workflows across web/docs/mac-app.
 
+## 7. Appendix: MCP Task Payload Example
+```json
+{
+  "task": "build-mac-app",
+  "intent": "Trigger desktop build",
+  "agent": "cursor-cloud-agent",
+  "context": { "branch": "main", "env": "prod" }
+}
+```
 ---
 
 Owner: [Your Name / Team]

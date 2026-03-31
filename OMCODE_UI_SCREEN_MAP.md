@@ -22,6 +22,14 @@ This document maps UI surfaces to screens, components, and user journeys across 
 - Primary flows for onboarding, discovery, and content access.
 - Contextual navigation for docs within code.omdala.com/code and docs.omdala.com/code/vi/en variants.
 
+## 5. Appendix: Screen-Route Table
+| Surface | Screen | Route |
+| :--- | :--- | :--- |
+| Web | Home | `/` |
+| App | Dashboard | `/app/dashboard` |
+| Docs | Getting Started | `/docs/start` |
+| Mac App | Local Editor | `native://editor` |
+
 ---
 
 Owner: [Your Name / Team]

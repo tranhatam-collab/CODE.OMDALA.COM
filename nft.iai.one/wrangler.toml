@@ -1,0 +1,11 @@
+name = "nft-iai-one"
+compatibility_date = "2026-03-23"
+pages_build_output_dir = "."
+
+[[kv_namespaces]]
+binding = "NFT_TRUST_KV"
+id = "cf3e4978dfcb4b85a7a3ddfd6b5ddd92"
+
+[[env.production.kv_namespaces]]
+binding = "NFT_TRUST_KV"
+id = "b53ab4b8d7d74cf0a4704ff9f4177849"

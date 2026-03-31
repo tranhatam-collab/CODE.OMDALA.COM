@@ -1,0 +1,13 @@
+{
+  "accountId": "f3f9e76222dcb488d5e303e29e8ba192",
+  "productionBranch": "main",
+  "compatibilityDate": "2026-03-23",
+  "projects": [
+    {
+      "key": "nft",
+      "projectName": "nft-iai-one",
+      "distDir": ".",
+      "customDomains": ["nft.iai.one"]
+    }
+  ]
+}

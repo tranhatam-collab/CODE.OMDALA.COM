@@ -51,6 +51,27 @@ This document defines the API gateway design and requirements for the OMCODE mon
 ## 11. Validation & Security Testing
 - Contract tests between gateway and downstream services; fuzzing and access checks.
 
+## 12. Appendix: OpenAPI v1 Skeleton
+```yaml
+# /api/v1/openapi.yaml
+openapi: 3.0.0
+info:
+  title: OMCODE API
+  version: 1.0.0
+paths:
+  /auth/login:
+    post:
+      summary: Authenticate user
+      responses:
+        '200':
+          description: OK
+  /docs:
+    get:
+      summary: List documentation
+      responses:
+        '200':
+          description: OK
+```
 ---
 
 Owner: [Your Name / Team]

@@ -1,0 +1,11 @@
+name = "nhachung-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+account_id = "f3f9e76222dcb488d5e303e29e8ba192"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "NHACHUNG_DB"
+database_id = "3fb5a8ba-73a2-48d9-88ba-5a451d182038"

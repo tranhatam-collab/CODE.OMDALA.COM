@@ -34,6 +34,13 @@ This document outlines the recommended sequence of implementation tasks across t
 - Add release process via GitHub Actions, changelog conventions, and release notes.
 - Instrument telemetry and set up dashboards for build/test/CI metrics.
 
+## 9. Appendix: Phase Deliverables Mapping
+| Phase | Deliverable | Doc Reference |
+| :--- | :--- | :--- |
+| 1 | Toolchain setup | `REPO_STRUCTURE` |
+| 2 | Gateway spec | `API_GATEWAY` |
+| 3 | SEO components | `WEB_SEO` |
+
 ---
 
 Owner: [Your Name / Team]

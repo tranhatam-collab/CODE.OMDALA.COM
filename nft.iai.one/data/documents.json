@@ -1,0 +1,42 @@
+[
+  {
+    "title": "NFT Registry Home",
+    "path": "/",
+    "audience": "Ecosystem / Public",
+    "statusLabel": "Published",
+    "tone": "live",
+    "summary": "Trang tong quan cho collections, tai lieu NFT va cong bo tai san ma hoa cua IAI."
+  },
+  {
+    "title": "NFT Docs Hub",
+    "path": "/docs/",
+    "audience": "Operations / Product",
+    "statusLabel": "Published",
+    "tone": "live",
+    "summary": "Hub dieu huong tai lieu cho verification, metadata va asset disclosure."
+  },
+  {
+    "title": "Verification Standard",
+    "path": "/docs/verification/",
+    "audience": "Governance / Compliance",
+    "statusLabel": "Published",
+    "tone": "live",
+    "summary": "Dieu kien bat buoc truoc khi mint NFT, cong bo collection hoac phat hanh asset proof."
+  },
+  {
+    "title": "Metadata Schema",
+    "path": "/docs/metadata/",
+    "audience": "Developers / Indexers",
+    "statusLabel": "Published",
+    "tone": "live",
+    "summary": "JSON shape cho collection, token metadata va evidence fields de dong bo voi app, flow va docs."
+  },
+  {
+    "title": "Asset Disclosure Policy",
+    "path": "/docs/disclosure/",
+    "audience": "Treasury / Public",
+    "statusLabel": "Published",
+    "tone": "live",
+    "summary": "Quy chuan cong bo wallet, reserve bucket, treasury attestation va update cadence."
+  }
+]

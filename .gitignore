@@ -1,0 +1,21 @@
+# Build & Dev
+node_modules/
+dist/
+.pnpm-store/
+.wrangler/
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Mac App
+src-tauri/target/
+src-tauri/gen/
+
+# Logs
+*.log
+
+# IDE
+.cursor/
+.vscode/
+.idea/

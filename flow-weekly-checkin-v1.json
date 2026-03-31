@@ -1,0 +1,204 @@
+{
+  "id": "flow_weekly_checkin_v1",
+  "workspace_id": "default_workspace",
+  "environment_id": "prod",
+  "name": "Weekly Check-in",
+  "slug": "weekly-checkin",
+  "description": "Collect weekly life signals, compute 4 core scores, generate 3 actions, create proof, and return dashboard-ready output.",
+  "status": "active",
+  "trigger": {
+    "type": "manual",
+    "config": {
+      "entrypoint": "app_checkin_submit"
+    }
+  },
+  "graph": {
+    "nodes": [
+      {
+        "key": "input_form",
+        "type": "input.form",
+        "display_name": "Check-in Input",
+        "config": {
+          "fields": [
+            { "key": "energy", "type": "number", "min": 1, "max": 10, "required": true },
+            { "key": "sleep", "type": "number", "min": 1, "max": 10, "required": true },
+            { "key": "stress", "type": "number", "min": 1, "max": 10, "required": true },
+            { "key": "focus", "type": "number", "min": 1, "max": 10, "required": true },
+            { "key": "work_clarity", "type": "number", "min": 1, "max": 10, "required": true },
+            { "key": "relationships", "type": "number", "min": 1, "max": 10, "required": true },
+            { "key": "contribution", "type": "number", "min": 1, "max": 10, "required": true },
+            { "key": "notes", "type": "string", "required": false, "maxLength": 500 }
+          ]
+        }
+      },
+      {
+        "key": "validate_input",
+        "type": "data.validate_schema",
+        "display_name": "Validate Input",
+        "config": {
+          "schema": {
+            "type": "object",
+            "required": [
+              "energy",
+              "sleep",
+              "stress",
+              "focus",
+              "work_clarity",
+              "relationships",
+              "contribution"
+            ],
+            "properties": {
+              "energy": { "type": "number", "minimum": 1, "maximum": 10 },
+              "sleep": { "type": "number", "minimum": 1, "maximum": 10 },
+              "stress": { "type": "number", "minimum": 1, "maximum": 10 },
+              "focus": { "type": "number", "minimum": 1, "maximum": 10 },
+              "work_clarity": { "type": "number", "minimum": 1, "maximum": 10 },
+              "relationships": { "type": "number", "minimum": 1, "maximum": 10 },
+              "contribution": { "type": "number", "minimum": 1, "maximum": 10 },
+              "notes": { "type": "string" }
+            }
+          }
+        }
+      },
+      {
+        "key": "calculate_metrics",
+        "type": "data.transform",
+        "display_name": "Calculate Core Metrics",
+        "config": {
+          "mode": "formula_map",
+          "formulas": {
+            "clarity": "round(((focus + work_clarity) / 2) * 10, 1)",
+            "stability": "round(((sleep + (11 - stress)) / 2) * 10, 1)",
+            "value": "round(((work_clarity + contribution) / 2) * 10, 1)",
+            "legacy": "round(((contribution + relationships) / 2) * 10, 1)"
+          }
+        }
+      },
+      {
+        "key": "detect_risk",
+        "type": "logic.if_condition",
+        "display_name": "Detect Burnout Risk",
+        "config": {
+          "conditions": [
+            {
+              "label": "high_risk",
+              "expression": "stress >= 8 && sleep <= 4"
+            },
+            {
+              "label": "moderate_risk",
+              "expression": "stress >= 7 || focus <= 4"
+            }
+          ],
+          "default_label": "normal"
+        }
+      },
+      {
+        "key": "generate_actions",
+        "type": "data.transform",
+        "display_name": "Generate 3 Actions",
+        "config": {
+          "mode": "rule_set",
+          "rules": [
+            {
+              "when": "sleep <= 5",
+              "append": "Fix sleep schedule: target 7+ hours for the next 3 nights."
+            },
+            {
+              "when": "stress >= 7",
+              "append": "Reduce overload: remove or delay one unnecessary task this week."
+            },
+            {
+              "when": "focus <= 5",
+              "append": "Block one 90-minute deep work session in your calendar."
+            },
+            {
+              "when": "work_clarity <= 5",
+              "append": "Clarify this week’s top outcome before starting new tasks."
+            },
+            {
+              "when": "contribution <= 5",
+              "append": "Do one concrete act of contribution or support this week."
+            },
+            {
+              "when": "relationships <= 5",
+              "append": "Repair one key relationship touchpoint this week."
+            }
+          ],
+          "limit": 3,
+          "fallback": [
+            "Protect your current rhythm for one more week.",
+            "Keep one deep work block.",
+            "Review progress in 7 days."
+          ]
+        }
+      },
+      {
+        "key": "store_checkin",
+        "type": "storage.d1_write",
+        "display_name": "Store Check-in",
+        "config": {
+          "table": "life_checkins",
+          "mode": "insert"
+        }
+      },
+      {
+        "key": "store_metrics",
+        "type": "storage.d1_write",
+        "display_name": "Store Metrics",
+        "config": {
+          "table": "life_metrics",
+          "mode": "insert"
+        }
+      },
+      {
+        "key": "create_proof",
+        "type": "security.proof_create",
+        "display_name": "Create Proof",
+        "config": {
+          "proof_type": "checkin",
+          "visibility": "private"
+        }
+      },
+      {
+        "key": "prepare_dashboard_output",
+        "type": "data.transform",
+        "display_name": "Prepare Dashboard Output",
+        "config": {
+          "mode": "pick_and_merge",
+          "shape": {
+            "metrics": {
+              "clarity": "{{calculate_metrics.clarity}}",
+              "stability": "{{calculate_metrics.stability}}",
+              "value": "{{calculate_metrics.value}}",
+              "legacy": "{{calculate_metrics.legacy}}"
+            },
+            "risk_level": "{{detect_risk.label}}",
+            "actions": "{{generate_actions.items}}",
+            "proof_id": "{{create_proof.proof_id}}",
+            "submitted_at": "{{system.now_iso}}"
+          }
+        }
+      }
+    ],
+    "edges": [
+      { "from": "input_form", "to": "validate_input" },
+      { "from": "validate_input", "to": "calculate_metrics" },
+      { "from": "calculate_metrics", "to": "detect_risk" },
+      { "from": "detect_risk", "to": "generate_actions" },
+      { "from": "generate_actions", "to": "store_checkin" },
+      { "from": "store_checkin", "to": "store_metrics" },
+      { "from": "store_metrics", "to": "create_proof" },
+      { "from": "create_proof", "to": "prepare_dashboard_output" }
+    ]
+  },
+  "policies": {
+    "max_run_cost_micros": 5000,
+    "approval_required": false,
+    "visibility": "private"
+  },
+  "output": {
+    "type": "json",
+    "root_node": "prepare_dashboard_output"
+  },
+  "version": 1
+}

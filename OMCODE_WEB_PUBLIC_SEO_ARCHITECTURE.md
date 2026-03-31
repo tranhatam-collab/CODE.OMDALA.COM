@@ -76,4 +76,32 @@ Routing decisions:
 - Integrate Next.js SEO helper (e.g., next-seo) and standardize per-page SEO config.
 - Add CI job to verify sitemap generation and metadata on PRs.
 
+## 13. Appendix: Next.js SEO Config Example
+```typescript
+// next-seo.config.ts
+export const SEO = {
+  titleTemplate: "%s | OMCODE",
+  defaultTitle: "OMCODE | Modern Agentic Framework",
+  description: "OMCODE: The frontier agentic, coding, and professional workflow framework.",
+  openGraph: {
+    type: 'website',
+    locale: 'en_IE',
+    url: 'https://code.omdala.com/',
+    siteName: 'OMCODE',
+  },
+};
+```
+## 14. Appendix: Sitemap Generation Example (next-sitemap)
+```javascript
+// next-sitemap.config.js
+module.exports = {
+  siteUrl: 'https://code.omdala.com',
+  generateRobotsTxt: true,
+  alternateRefs: [
+    { href: 'https://code.omdala.com/vi', hreflang: 'vi' },
+    { href: 'https://code.omdala.com/en', hreflang: 'en' },
+  ],
+}
+```
+
 Notes: This document should evolve with surface additions (marketing, docs, app) and domain strategy changes (e.g., new domains, Cloudflare routing).

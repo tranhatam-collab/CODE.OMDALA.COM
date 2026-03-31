@@ -1,0 +1,20 @@
+{
+  "name": "nft-iai-one",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Public NFT registry, asset disclosure portal, and documentation surface for the IAI ecosystem.",
+  "scripts": {
+    "dev": "wrangler pages dev . --port 8788",
+    "deploy:pages": "CLOUDFLARE_ACCOUNT_ID=f3f9e76222dcb488d5e303e29e8ba192 wrangler pages deploy . --project-name nft-iai-one",
+    "deploy:preview": "CLOUDFLARE_ACCOUNT_ID=f3f9e76222dcb488d5e303e29e8ba192 wrangler pages deploy . --project-name nft-iai-one --branch preview",
+    "sync:cloudflare": "node scripts/cloudflare-sync.mjs",
+    "sync:mint-secrets": "node scripts/sync-mint-secrets.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.11.0"
+  },
+  "dependencies": {
+    "ethers": "^6.16.0"
+  }
+}

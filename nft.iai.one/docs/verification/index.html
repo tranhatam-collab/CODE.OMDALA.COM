@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="vi" data-language="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Verification Standard | Chuẩn xác minh cho nft.iai.one</title>
+  <meta name="description" content="Chuẩn xác minh song ngữ cho issuance NFT, metadata thật, quyền phát hành và công bố tài sản trên nft.iai.one." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#08111d" />
+  <meta name="color-scheme" content="dark" />
+  <link rel="canonical" href="https://nft.iai.one/docs/verification/" />
+  <link rel="icon" href="/assets/nft-mark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script type="module" src="/assets/site.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/" aria-label="NFT.IAI.ONE home">
+          <img class="brand-mark" src="/assets/nft-mark.svg" alt="NFT.IAI.ONE mark" />
+          <span class="brand-copy">
+            <span class="brand-name">NFT.IAI.ONE</span>
+            <span class="brand-meta">
+              <span data-lang="vi">Lớp xác thực NFT song ngữ cho hệ sinh thái IAI</span>
+              <span data-lang="en">Bilingual NFT trust layer for the IAI ecosystem</span>
+            </span>
+          </span>
+        </a>
+
+        <div class="header-actions">
+          <div class="lang-dropdown" data-language-toggle>
+            <button class="lang-button" type="button" data-language-trigger aria-haspopup="menu" aria-expanded="false">
+              <span class="lang-flag" data-language-flag>🇻🇳</span>
+              <span data-language-label>Tiếng Việt</span>
+              <span class="lang-button-code" data-language-code>VI</span>
+              <span class="lang-button-caret">▾</span>
+            </button>
+            <div class="lang-menu" data-language-menu role="menu" hidden>
+              <button class="lang-option" type="button" data-language-option="vi" role="menuitemradio" aria-checked="true">
+                <span class="lang-flag">🇻🇳</span>
+                <span>Tiếng Việt</span>
+                <small>Vietnamese</small>
+              </button>
+              <button class="lang-option" type="button" data-language-option="en" role="menuitemradio" aria-checked="false">
+                <span class="lang-flag">🇺🇸</span>
+                <span>English</span>
+                <small>International</small>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/">
+            <span data-lang="vi">Trang chủ</span>
+            <span data-lang="en">Home</span>
+          </a>
+          <a href="/docs/">
+            <span data-lang="vi">Tài liệu</span>
+            <span data-lang="en">Docs</span>
+          </a>
+          <a href="/docs/verification/" class="is-active">
+            <span data-lang="vi">Xác minh</span>
+            <span data-lang="en">Verification</span>
+          </a>
+          <a href="/docs/metadata/">
+            <span data-lang="vi">Metadata</span>
+            <span data-lang="en">Metadata</span>
+          </a>
+          <a href="/docs/disclosure/">
+            <span data-lang="vi">Công bố</span>
+            <span data-lang="en">Disclosure</span>
+          </a>
+          <a href="https://home.iai.one" target="_blank" rel="noreferrer" class="nav-cta">
+            <span data-lang="vi">Mở home.iai.one</span>
+            <span data-lang="en">Open home.iai.one</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="doc-hero">
+        <div class="container">
+          <article class="panel card">
+            <span class="eyebrow">
+              <span data-lang="vi">Chuẩn xác minh | mint gating | production</span>
+              <span data-lang="en">Verification standard | mint gating | production</span>
+            </span>
+            <h1>
+              <span data-lang="vi">Không mint trước khi quyền phát hành, bằng chứng và trạng thái công bố được xác minh đầy đủ.</span>
+              <span data-lang="en">Never mint before issuance rights, proof integrity, and disclosure state are fully verified.</span>
+            </h1>
+            <p class="lead">
+              <span data-lang="vi">Trang này định nghĩa các gate bắt buộc trước khi một collection, chứng chỉ, badge hay mục công bố tài sản có thể đi từ preview sang trạng thái mint-ready trên nft.iai.one.</span>
+              <span data-lang="en">This page defines the mandatory gates that move a collection, certificate, badge, or asset disclosure from preview into a mint-ready state on nft.iai.one.</span>
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="/#studio">
+                <span data-lang="vi">Mở Mint Studio</span>
+                <span data-lang="en">Open Mint Studio</span>
+              </a>
+              <a class="btn btn-secondary" href="/docs/metadata/">
+                <span data-lang="vi">Xem schema metadata</span>
+                <span data-lang="en">View metadata schema</span>
+              </a>
+              <a class="btn" href="/api/issuance-preview">
+                <span data-lang="vi">Xem endpoint preview</span>
+                <span data-lang="en">View preview endpoint</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container doc-layout">
+          <article class="doc-section card">
+            <h2>
+              <span data-lang="vi">1. Năm gate bắt buộc</span>
+              <span data-lang="en">1. Five mandatory gates</span>
+            </h2>
+            <ul>
+              <li><span data-lang="vi"><strong>Gate quyền sở hữu:</strong> xác định rõ owner entity, issuer, phạm vi trách nhiệm và người phê duyệt cuối.</span><span data-lang="en"><strong>Ownership gate:</strong> identify the owner entity, issuer, responsibility boundary, and final approver.</span></li>
+              <li><span data-lang="vi"><strong>Gate bằng chứng:</strong> phải có content hash, proof URL hoặc tài liệu tham chiếu có thể kiểm tra công khai.</span><span data-lang="en"><strong>Evidence gate:</strong> a content hash, proof URL, or publicly verifiable reference document is required.</span></li>
+              <li><span data-lang="vi"><strong>Gate quyền phát hành:</strong> issuer chỉ được mint khi policy, vai trò và loại collection đã được duyệt.</span><span data-lang="en"><strong>Issuance gate:</strong> the issuer may mint only after the policy, role, and collection class are approved.</span></li>
+              <li><span data-lang="vi"><strong>Gate công bố:</strong> trạng thái disclosure phải rõ là published, pilot, pending hoặc planned.</span><span data-lang="en"><strong>Disclosure gate:</strong> the disclosure state must be explicit: published, pilot, pending, or planned.</span></li>
+              <li><span data-lang="vi"><strong>Gate schema:</strong> metadata phải đúng version, đúng trường dữ liệu và đủ khả năng index.</span><span data-lang="en"><strong>Schema gate:</strong> metadata must be versioned, structurally valid, and indexable.</span></li>
+            </ul>
+          </article>
+
+          <article class="doc-section card">
+            <h2>
+              <span data-lang="vi">2. Các lớp issuer được hỗ trợ</span>
+              <span data-lang="en">2. Supported issuer classes</span>
+            </h2>
+            <ul>
+              <li><span data-lang="vi"><strong>NFT định danh:</strong> founder, builder, contributor, operator và partner cần được gắn provenance vai trò.</span><span data-lang="en"><strong>Identity NFTs:</strong> founders, builders, contributors, operators, and partners must carry role provenance.</span></li>
+              <li><span data-lang="vi"><strong>NFT chứng chỉ:</strong> yêu cầu hash nội dung, completion proof, issuer signature và policy phát hành theo chương trình.</span><span data-lang="en"><strong>Certificate NFTs:</strong> require a content hash, completion proof, issuer signature, and program issuance policy.</span></li>
+              <li><span data-lang="vi"><strong>NFT uy tín hoặc soulbound:</strong> badge, verifier status và trusted contributor không được mô tả như tài sản đầu cơ.</span><span data-lang="en"><strong>Reputation or soulbound NFTs:</strong> badges, verifier status, and trusted contributor records must not be framed as speculative assets.</span></li>
+              <li><span data-lang="vi"><strong>NFT bản quyền:</strong> cần rights statement, source provenance và điều khoản royalty trước khi phát hành.</span><span data-lang="en"><strong>Creator-rights NFTs:</strong> require rights statements, source provenance, and royalty terms before issuance.</span></li>
+              <li><span data-lang="vi"><strong>NFT công bố tài sản:</strong> chỉ phát hành sau khi treasury hoặc governance sign-off hoàn tất.</span><span data-lang="en"><strong>Asset disclosure NFTs:</strong> issue only after treasury or governance sign-off is complete.</span></li>
+            </ul>
+          </article>
+
+          <article class="doc-section card">
+            <h2>
+              <span data-lang="vi">3. Trạng thái release</span>
+              <span data-lang="en">3. Release states</span>
+            </h2>
+            <ul>
+              <li><span data-lang="vi"><strong>Published:</strong> metadata, proof và tài liệu công khai đã đủ để người ngoài đối chiếu.</span><span data-lang="en"><strong>Published:</strong> metadata, proof, and public documentation are sufficient for external verification.</span></li>
+              <li><span data-lang="vi"><strong>Pilot:</strong> quy trình đã chạy thật ở phạm vi giới hạn nhưng chưa phải cấu hình cuối cùng.</span><span data-lang="en"><strong>Pilot:</strong> the flow is running with real data in a limited scope, but it is not the final release configuration.</span></li>
+              <li><span data-lang="vi"><strong>Pending:</strong> schema hoặc collection đã có, nhưng còn thiếu ví, proof, approval hoặc contract.</span><span data-lang="en"><strong>Pending:</strong> the schema or collection exists, but wallet, proof, approval, or contract details are still missing.</span></li>
+              <li><span data-lang="vi"><strong>Planned:</strong> mới ở mức thiết kế hệ thống và tài liệu, chưa được xem là dữ liệu phát hành.</span><span data-lang="en"><strong>Planned:</strong> still a system-design and documentation concept, not issuance data.</span></li>
+            </ul>
+          </article>
+
+          <article class="doc-section card">
+            <h2>
+              <span data-lang="vi">4. Luồng kiểm tra chuẩn</span>
+              <span data-lang="en">4. Standard verification flow</span>
+            </h2>
+            <ul>
+              <li><span data-lang="vi"><strong>Bước 1:</strong> app.iai.one xác nhận issuer, loại collection và policy phát hành.</span><span data-lang="en"><strong>Step 1:</strong> app.iai.one confirms the issuer, collection class, and issuance policy.</span></li>
+              <li><span data-lang="vi"><strong>Bước 2:</strong> flow.iai.one sinh content hash, proof bundle và issuance payload có version.</span><span data-lang="en"><strong>Step 2:</strong> flow.iai.one generates the content hash, proof bundle, and versioned issuance payload.</span></li>
+              <li><span data-lang="vi"><strong>Bước 3:</strong> nft.iai.one tạo metadata thật và issuance preview cho người dùng kiểm tra.</span><span data-lang="en"><strong>Step 3:</strong> nft.iai.one generates real metadata and an issuance preview for user review.</span></li>
+              <li><span data-lang="vi"><strong>Bước 4:</strong> chỉ khi checklist đạt đủ thì worker mint mới được phép gửi giao dịch thật.</span><span data-lang="en"><strong>Step 4:</strong> only after the checklist passes may the mint worker submit a live transaction.</span></li>
+            </ul>
+          </article>
+
+          <article class="doc-section card">
+            <h2>
+              <span data-lang="vi">5. Khi nào phải chặn mint</span>
+              <span data-lang="en">5. When minting must be blocked</span>
+            </h2>
+            <ul>
+              <li><span data-lang="vi">Thiếu ví nhận, thiếu tên chủ thể hoặc thiếu content hash.</span><span data-lang="en">The recipient wallet, subject name, or content hash is missing.</span></li>
+              <li><span data-lang="vi">Proof URL không tồn tại, không public hoặc không khớp với tài liệu công bố.</span><span data-lang="en">The proof URL is unavailable, not public, or inconsistent with the disclosure document.</span></li>
+              <li><span data-lang="vi">Collection đang ở trạng thái planned hoặc pending nhưng bị yêu cầu mint như production.</span><span data-lang="en">A planned or pending collection is being pushed as a production mint.</span></li>
+              <li><span data-lang="vi">Worker có payload nhưng chưa có cấu hình on-chain hoặc signer hợp lệ.</span><span data-lang="en">The worker has a payload, but the on-chain configuration or signer is not valid.</span></li>
+            </ul>
+          </article>
+
+          <article class="doc-section card">
+            <h2>
+              <span data-lang="vi">6. Endpoint liên quan</span>
+              <span data-lang="en">6. Related endpoints</span>
+            </h2>
+            <ul>
+              <li><span data-lang="vi"><code>/api/collections</code> trả về policy và trạng thái collection theo ngôn ngữ.</span><span data-lang="en"><code>/api/collections</code> returns collection policies and states in the selected language.</span></li>
+              <li><span data-lang="vi"><code>/api/metadata</code> sinh metadata thật theo collection, token và evidence query.</span><span data-lang="en"><code>/api/metadata</code> generates real metadata from the collection, token, and evidence query.</span></li>
+              <li><span data-lang="vi"><code>/api/issuance-preview</code> cho phép người dùng xem checklist và mint readiness trước khi phát hành.</span><span data-lang="en"><code>/api/issuance-preview</code> lets users inspect the checklist and mint readiness before issuance.</span></li>
+              <li><span data-lang="vi"><code>/api/issue</code> là worker entrypoint cho live mint khi môi trường on-chain đã hoàn tất.</span><span data-lang="en"><code>/api/issue</code> is the worker entrypoint for live minting once the on-chain environment is complete.</span></li>
+            </ul>
+            <div class="registry-actions">
+              <a class="btn" href="/docs/metadata/">
+                <span data-lang="vi">Tiếp tục sang Metadata</span>
+                <span data-lang="en">Continue to Metadata</span>
+              </a>
+              <a class="btn btn-secondary" href="/docs/disclosure/">
+                <span data-lang="vi">Xem policy công bố</span>
+                <span data-lang="en">View disclosure policy</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>
+          <span data-lang="vi">Chuẩn xác minh cho issuance NFT và công bố tài sản của IAI</span>
+          <span data-lang="en">Verification standard for NFT issuance and asset disclosure in IAI</span>
+        </div>
+        <div class="footer-links">
+          <a href="/docs/">
+            <span data-lang="vi">Trung tâm tài liệu</span>
+            <span data-lang="en">Docs hub</span>
+          </a>
+          <a href="/docs/metadata/">Metadata</a>
+          <a href="/docs/disclosure/">
+            <span data-lang="vi">Công bố</span>
+            <span data-lang="en">Disclosure</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
