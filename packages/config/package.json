@@ -1,0 +1,17 @@
+{
+  "name": "@omcode/config",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tsconfig": "./tsconfig.json"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src/"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

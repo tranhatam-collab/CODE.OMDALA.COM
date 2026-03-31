@@ -1,0 +1,20 @@
+{
+  "name": "omcode",
+  "private": true,
+  "version": "0.0.1",
+  "description": "OMCODE — AI-native coding workspace for Mac developers",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "bootstrap:mac": "bash scripts/bootstrap-mac.sh"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}

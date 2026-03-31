@@ -1,0 +1,13 @@
+{
+  "name": "@omcode/docs",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Docs dev - TBA'",
+    "build": "echo 'Docs build - TBA'",
+    "lint": "biome check src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": { "typescript": "^5.7.0" }
+}

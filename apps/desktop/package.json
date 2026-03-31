@@ -1,0 +1,13 @@
+{
+  "name": "@omcode/desktop",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'Desktop dev - TBA'",
+    "build": "echo 'Desktop build - TBA'",
+    "lint": "biome check src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": { "typescript": "^5.7.0" }
+}
