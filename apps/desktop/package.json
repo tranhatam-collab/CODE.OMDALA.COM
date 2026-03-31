@@ -10,7 +10,7 @@
     "build:main": "tsc -p src/main/tsconfig.json",
     "build:preload": "tsc -p src/preload/tsconfig.json",
     "build:renderer": "vite build",
-    "lint": "biome check src/",
+    "lint": "biome check .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
