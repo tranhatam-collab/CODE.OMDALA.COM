@@ -1,0 +1,35 @@
+name: "Feature Request"
+description: "Suggest a feature for OMCODE"
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for suggesting a feature. Please describe the problem this solves."
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem"
+      description: "What problem does this feature solve?"
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: "Proposed Solution"
+      description: "How should this work?"
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: "Surface"
+      options: ["Desktop App", "Public Web", "Authenticated App", "API Gateway", "MCP", "Other"]
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Priority"
+      options: ["Low", "Medium", "High"]
+    validations:
+      required: true

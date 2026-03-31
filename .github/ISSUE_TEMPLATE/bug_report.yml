@@ -1,0 +1,44 @@
+name: "Bug Report"
+description: "Report a bug in OMCODE"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for reporting a bug. Please fill in the details below."
+  - type: dropdown
+    id: surface
+    attributes:
+      label: "Surface"
+      options: ["Desktop App", "Public Web", "Authenticated App", "API Gateway", "Other"]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: "Version"
+      description: "App version or commit hash"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to Reproduce"
+      description: "1. Go to...\n2. Click on...\n3. See error..."
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected Behavior"
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: "Actual Behavior"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Logs / Screenshots"
