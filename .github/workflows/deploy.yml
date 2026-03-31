@@ -40,5 +40,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: 'omcode-web'
-          directory: 'apps/web/.next'
+          directory: 'apps/web/out'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
