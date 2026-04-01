@@ -13,12 +13,12 @@ head_sampling_rate = 1
 
 [[d1_databases]]
 binding = "DB"
-database_name = "omcode_d1"
+database_name = "omcode-d1"
 database_id = "your-d1-uuid-here"
 
 [[r2_buckets]]
 binding = "STORAGE"
-bucket_name = "omcode_r2"
+bucket_name = "omcode-r2-unique-2026"
 
 [[kv_namespaces]]
 binding = "KV"
