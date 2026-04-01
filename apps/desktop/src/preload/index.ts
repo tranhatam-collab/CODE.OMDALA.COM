@@ -5,6 +5,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
   isGitRepo: (path: string) => ipcRenderer.invoke('fs:isGitRepo', path),
   listDir: (path: string) => ipcRenderer.invoke('fs:listDir', path),
   readFile: (path: string) => ipcRenderer.invoke('fs:readFile', path),
+  runCommand: (command: string) => ipcRenderer.invoke('runCommand', command),
   getVersion: () => ipcRenderer.invoke('app:getVersion'),
   getPlatform: () => ipcRenderer.invoke('app:getPlatform'),
 });

@@ -1,32 +1,100 @@
 import { t } from '@omcode/i18n';
+import { useState } from 'react';
 import type { CommandEntry } from '../store/types';
 
-interface Props { locale: 'vi' | 'en'; commands: CommandEntry[]; onBack: () => void; }
+interface Props {
+  locale: 'vi' | 'en';
+  onBack: () => void;
+}
 
-export default function CommandCenter({ locale, commands, onBack }: Props) {
+export default function CommandCenter({ locale, onBack }: Props) {
+  const [commands, setCommands] = useState<CommandEntry[]>([]);
+  const [cmd, setCmd] = useState('');
+
+  const runCmd = async (command: string) => {
+    if (!window.electronAPI) return;
+    const output = await window.electronAPI.runCommand(command);
+    setCommands((prev) => [
+      ...prev,
+      { id: crypto.randomUUID(), command, status: 'completed', tier: 'safe', output },
+    ]);
+  };
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 24px', borderBottom: '1px solid #2d2d44' }}>
-        <button onClick={onBack} style={{ padding: '6px 12px', borderRadius: '6px', border: '1px solid #4a4a68', background: 'transparent', color: '#e2e8f0', fontSize: '13px' }}>← Back</button>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        background: '#1e1e3a',
+        color: '#e2e8f0',
+      }}
+    >
+      <header
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '16px 24px',
+          borderBottom: '1px solid #2d2d44',
+        }}
+      >
+        <button
+          onClick={onBack}
+          style={{
+            padding: '6px 12px',
+            borderRadius: '6px',
+            border: '1px solid #4a4a68',
+            background: 'transparent',
+            color: '#e2e8f0',
+            fontSize: '13px',
+          }}
+        >
+          ← Back
+        </button>
         <h1 style={{ fontSize: '18px', fontWeight: 600 }}>Command Center</h1>
         <div />
       </header>
       <main style={{ flex: 1, overflow: 'auto', padding: '24px' }}>
-        {commands.length === 0 ? (
-          <p style={{ color: '#8b8ba7', textAlign: 'center', padding: '32px' }}>No commands executed yet</p>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {commands.map(cmd => (
-              <div key={cmd.id} style={{ padding: '12px', borderRadius: '8px', border: '1px solid #2d2d44', display: 'flex', justifyContent: 'space-between' }}>
-                <div>
-                  <code style={{ fontSize: '13px', color: '#e2e8f0' }}>{cmd.command}</code>
-                  <span style={{ marginLeft: '8px', padding: '2px 6px', borderRadius: '4px', fontSize: '11px', background: cmd.tier === 'safe' ? '#22c55e20' : cmd.tier === 'review' ? '#f59e0b20' : '#ef444420', color: cmd.tier === 'safe' ? '#22c55e' : cmd.tier === 'review' ? '#f59e0b' : '#ef4444' }}>{cmd.tier}</span>
-                </div>
-                <span style={{ fontSize: '12px', color: '#8b8ba7' }}>{cmd.status}</span>
+        <div style={{ marginBottom: '24px' }}>
+          <input
+            value={cmd}
+            onChange={(e) => setCmd(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && runCmd(cmd)}
+            placeholder="Run command..."
+            style={{
+              width: '100%',
+              padding: '12px',
+              borderRadius: '8px',
+              border: '1px solid #4a4a68',
+              background: '#2d2d44',
+              color: '#e2e8f0',
+            }}
+          />
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {commands.map((c) => (
+            <div
+              key={c.id}
+              style={{ padding: '12px', borderRadius: '8px', border: '1px solid #2d2d44' }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <code style={{ fontSize: '13px', color: '#e2e8f0' }}>{c.command}</code>
+                <span style={{ fontSize: '12px', color: '#8b8ba7' }}>{c.status}</span>
               </div>
-            ))}
-          </div>
-        )}
+              <pre
+                style={{
+                  marginTop: '8px',
+                  color: '#22c55e',
+                  fontSize: '12px',
+                  whiteSpace: 'pre-wrap',
+                }}
+              >
+                {c.output}
+              </pre>
+            </div>
+          ))}
+        </div>
       </main>
     </div>
   );
