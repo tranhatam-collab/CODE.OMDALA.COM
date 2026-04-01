@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface D1SchemaMcpConfig {
   dbId: string;
   apiToken: string;
@@ -5,6 +7,7 @@ export interface D1SchemaMcpConfig {
 }
 
 export class D1SchemaMcpServer {
+  private config: D1SchemaMcpConfig;
   constructor(config: D1SchemaMcpConfig) {
     this.config = config;
   }
@@ -14,27 +17,31 @@ export class D1SchemaMcpServer {
   }
 
   async generateMigration(changes: string): Promise<string> {
-    // Generates SQL migration scripts based on natural language or diffs
+    z.string().parse(changes);
     return `-- Migration generated for: ${changes}\nALTER TABLE workspaces ADD COLUMN created_at TEXT;`;
   }
 
   async validateMigration(sql: string): Promise<{ safe: boolean; warnings: string[] }> {
+    z.string().parse(sql);
     if (sql.toLowerCase().includes('drop table'))
       return { safe: false, warnings: ['Destructive DROP TABLE detected'] };
     return { safe: true, warnings: [] };
   }
 
-  async applyMigration(_sql: string): Promise<{ success: boolean; rowsAffected: number }> {
+  async applyMigration(sql: string): Promise<{ success: boolean; rowsAffected: number }> {
+    z.string().parse(sql);
     // CRITICAL: Requires strict approval
     return { success: true, rowsAffected: 1 };
   }
 
-  async rollbackMigration(_version: string): Promise<{ success: boolean; rowsAffected: number }> {
+  async rollbackMigration(version: string): Promise<{ success: boolean; rowsAffected: number }> {
+    z.string().parse(version);
     // CRITICAL: Requires admin approval
     return { success: true, rowsAffected: 1 };
   }
 
-  async querySchema(sql: string): Promise<any[]> {
+  async querySchema(sql: string): Promise<Record<string, unknown>[]> {
+    z.string().parse(sql);
     if (
       sql.toLowerCase().includes('drop') ||
       sql.toLowerCase().includes('delete') ||

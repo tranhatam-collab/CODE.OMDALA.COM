@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface RoadmapItem {
   id: string;
   title: string;
@@ -6,6 +8,8 @@ export interface RoadmapItem {
 }
 
 export class RoadmapMcpServer {
+  private roadmapPath: string;
+
   constructor(path: string) {
     this.roadmapPath = path;
   }
@@ -22,11 +26,13 @@ export class RoadmapMcpServer {
     itemId: string,
     status: 'todo' | 'in_progress' | 'done',
   ): Promise<{ success: boolean; item: RoadmapItem }> {
+    z.object({ itemId: z.string(), status: z.enum(['todo', 'in_progress', 'done']) }).parse({ itemId, status });
     // Requires approval
     return { success: true, item: { id: itemId, title: 'Updated Item', status, phase: 0 } };
   }
 
   async generateRoadmap(issuesOrPrs: string[]): Promise<RoadmapItem[]> {
+    z.array(z.string()).parse(issuesOrPrs);
     return issuesOrPrs.map((i, index) => ({
       id: `auto-${index}`,
       title: i,
