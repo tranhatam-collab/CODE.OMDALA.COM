@@ -1,10 +1,13 @@
 {
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "productName": "OMCODE",
   "version": "0.1.0-alpha",
   "identifier": "com.omdala.code",
   "build": {
-    "distDir": "../dist",
-    "devPath": "http://localhost:5173"
+    "beforeDevCommand": "echo 'Vite dev running'",
+    "beforeBuildCommand": "pnpm build:renderer",
+    "devUrl": "http://localhost:5173",
+    "frontendDist": "../dist/renderer"
   },
   "bundle": {
     "active": true,
@@ -31,8 +34,5 @@
     "security": {
       "csp": null
     }
-  },
-  "bundle": {
-    "externalBin": []
   }
 }
