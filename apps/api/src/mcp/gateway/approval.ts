@@ -17,11 +17,11 @@ export class ApprovalManager {
     return id;
   }
 
-  getPending(userId: string): ApprovalRequest[] {
-    return Array.from(this.queue.values()).filter(r => r.status === 'pending');
+  getPending(_userId: string): ApprovalRequest[] {
+    return Array.from(this.queue.values()).filter((r) => r.status === 'pending');
   }
 
-  approve(id: string, adminId: string): boolean {
+  approve(id: string, _adminId: string): boolean {
     const req = this.queue.get(id);
     if (!req || req.status !== 'pending') return false;
     req.status = 'approved';
@@ -29,7 +29,7 @@ export class ApprovalManager {
     return true;
   }
 
-  reject(id: string, reason: string, adminId: string): boolean {
+  reject(id: string, _reason: string, _adminId: string): boolean {
     const req = this.queue.get(id);
     if (!req || req.status !== 'pending') return false;
     req.status = 'rejected';

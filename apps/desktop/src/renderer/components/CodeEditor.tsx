@@ -23,7 +23,7 @@ export const CodeEditor: React.FC<EditorProps> = ({
 }) => {
   useEffect(() => {
     Prism.highlightAll();
-  }, [value, language]);
+  }, []);
 
   return (
     <div

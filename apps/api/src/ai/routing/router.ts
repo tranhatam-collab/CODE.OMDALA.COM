@@ -1,5 +1,4 @@
-import type { Context } from 'hono';
-import { getAllProviders, getProvider } from '../providers/registry';
+import { getAllProviders } from '../providers/registry';
 
 const DEFAULT_MODEL_MAP: Record<string, string> = {
   plan: 'gpt-5.4',

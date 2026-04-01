@@ -1,9 +1,17 @@
 import { z } from 'zod';
 
 export const TaskTypeSchema = z.enum([
-  'plan', 'build', 'review', 'chat', 'summarize',
-  'docs', 'release', 'guardrail', 'test-gen',
-  'patch-explain', 'commit-draft',
+  'plan',
+  'build',
+  'review',
+  'chat',
+  'summarize',
+  'docs',
+  'release',
+  'guardrail',
+  'test-gen',
+  'patch-explain',
+  'commit-draft',
 ]);
 export type TaskType = z.infer<typeof TaskTypeSchema>;
 
@@ -19,12 +27,14 @@ export const AiRequestSchema = z.object({
     systemPrompt: z.string().optional(),
     promptId: z.string().optional(),
   }),
-  options: z.object({
-    temperature: z.number().min(0).max(2).default(0.7),
-    maxTokens: z.number().min(1).max(32768).default(4096),
-    stream: z.boolean().default(false),
-    timeout: z.number().min(1000).max(120000).default(30000),
-  }).optional(),
+  options: z
+    .object({
+      temperature: z.number().min(0).max(2).default(0.7),
+      maxTokens: z.number().min(1).max(32768).default(4096),
+      stream: z.boolean().default(false),
+      timeout: z.number().min(1000).max(120000).default(30000),
+    })
+    .optional(),
 });
 export type AiRequest = z.infer<typeof AiRequestSchema>;
 
@@ -63,10 +73,12 @@ export type AiResponse = z.infer<typeof AiResponseSchema>;
 export const StreamChunkSchema = z.object({
   type: z.enum(['chunk', 'done', 'error']),
   id: z.string().uuid(),
-  data: z.object({
-    delta: z.string(),
-    index: z.number(),
-  }).optional(),
+  data: z
+    .object({
+      delta: z.string(),
+      index: z.number(),
+    })
+    .optional(),
   usage: UsageSchema.nullable(),
   meta: z.object({ elapsed: z.number() }),
 });
@@ -76,10 +88,12 @@ export const ProviderSchema = z.object({
   name: z.string(),
   status: z.enum(['healthy', 'degraded', 'down']),
   models: z.array(z.string()),
-  rateLimit: z.object({
-    requestsPerMinute: z.number(),
-    tokensPerMinute: z.number(),
-  }).optional(),
+  rateLimit: z
+    .object({
+      requestsPerMinute: z.number(),
+      tokensPerMinute: z.number(),
+    })
+    .optional(),
 });
 export type Provider = z.infer<typeof ProviderSchema>;
 

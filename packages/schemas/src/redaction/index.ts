@@ -9,10 +9,30 @@ export const RedactionPatternSchema = z.object({
 export type RedactionPattern = z.infer<typeof RedactionPatternSchema>;
 
 export const DEFAULT_PATTERNS: RedactionPattern[] = [
-  { name: 'openai_key', pattern: 'sk-[a-zA-Z0-9]{20,}', replacement: '[OPENAI_KEY]', severity: 'critical' },
-  { name: 'anthropic_key', pattern: 'sk-ant-[a-zA-Z0-9]{20,}', replacement: '[ANTHROPIC_KEY]', severity: 'critical' },
-  { name: 'github_token', pattern: 'ghp_[a-zA-Z0-9]{36}', replacement: '[GITHUB_TOKEN]', severity: 'critical' },
-  { name: 'generic_secret', pattern: '(?i)(secret|password|token|key)\\s*[:=]\\s*\\S+', replacement: '[SECRET]', severity: 'high' },
+  {
+    name: 'openai_key',
+    pattern: 'sk-[a-zA-Z0-9]{20,}',
+    replacement: '[OPENAI_KEY]',
+    severity: 'critical',
+  },
+  {
+    name: 'anthropic_key',
+    pattern: 'sk-ant-[a-zA-Z0-9]{20,}',
+    replacement: '[ANTHROPIC_KEY]',
+    severity: 'critical',
+  },
+  {
+    name: 'github_token',
+    pattern: 'ghp_[a-zA-Z0-9]{36}',
+    replacement: '[GITHUB_TOKEN]',
+    severity: 'critical',
+  },
+  {
+    name: 'generic_secret',
+    pattern: '(?i)(secret|password|token|key)\\s*[:=]\\s*\\S+',
+    replacement: '[SECRET]',
+    severity: 'high',
+  },
   { name: 'env_var', pattern: '\\$\\{?[A-Z_]+\\}?', replacement: '[ENV_VAR]', severity: 'medium' },
 ];
 

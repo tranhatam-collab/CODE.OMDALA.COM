@@ -1,4 +1,3 @@
-import { t } from '@omcode/i18n';
 import { useState } from 'react';
 import type { CommandEntry } from '../store/types';
 

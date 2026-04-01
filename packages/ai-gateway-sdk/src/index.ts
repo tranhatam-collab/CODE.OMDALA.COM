@@ -1,4 +1,15 @@
-export type TaskType = 'plan' | 'build' | 'review' | 'chat' | 'summarize' | 'docs' | 'release' | 'guardrail' | 'test-gen' | 'patch-explain' | 'commit-draft';
+export type TaskType =
+  | 'plan'
+  | 'build'
+  | 'review'
+  | 'chat'
+  | 'summarize'
+  | 'docs'
+  | 'release'
+  | 'guardrail'
+  | 'test-gen'
+  | 'patch-explain'
+  | 'commit-draft';
 export type ProviderName = 'openai' | 'anthropic' | 'cloudflare';
 export type ResponseStatus = 'success' | 'error' | 'partial';
 export type TrustLevel = 'low' | 'medium' | 'high' | 'critical';
@@ -58,8 +69,14 @@ export interface StreamChunk {
 
 export interface ProviderAdapter {
   name: ProviderName;
-  chatCompletion(messages: unknown[], options?: Record<string, unknown>): Promise<AiGatewayResponse>;
-  streamCompletion(messages: unknown[], options?: Record<string, unknown>): AsyncIterableIterator<StreamChunk>;
+  chatCompletion(
+    messages: unknown[],
+    options?: Record<string, unknown>,
+  ): Promise<AiGatewayResponse>;
+  streamCompletion(
+    messages: unknown[],
+    options?: Record<string, unknown>,
+  ): AsyncIterableIterator<StreamChunk>;
   getModels(): Promise<string[]>;
   getHealth(): Promise<{ status: 'healthy' | 'degraded' | 'down' }>;
   getCost(inputTokens: number, outputTokens: number, model: string): number;

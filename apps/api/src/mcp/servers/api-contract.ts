@@ -1,19 +1,20 @@
 export class ApiContractMcpServer {
-  async readContracts(path: string): Promise<Record<string, unknown>> {
+  async readContracts(_path: string): Promise<Record<string, unknown>> {
     return {
-      version: "1.0",
-      endpoints: [
-        { path: "/v1/users", method: "GET", response: "User[]" }
-      ]
+      version: '1.0',
+      endpoints: [{ path: '/v1/users', method: 'GET', response: 'User[]' }],
     };
   }
 
-  async generateContract(codePath: string): Promise<Record<string, unknown>> {
+  async generateContract(_codePath: string): Promise<Record<string, unknown>> {
     // Requires approval
-    return { version: "draft", endpoints: [] };
+    return { version: 'draft', endpoints: [] };
   }
 
-  async validateContract(implPath: string, contractPath: string): Promise<{ valid: boolean; errors: string[] }> {
+  async validateContract(
+    _implPath: string,
+    _contractPath: string,
+  ): Promise<{ valid: boolean; errors: string[] }> {
     return { valid: true, errors: [] };
   }
 }

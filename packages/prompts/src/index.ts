@@ -23,7 +23,8 @@ export const PROMPTS: PromptTemplate[] = [
     id: 'plan-default',
     task: 'plan',
     name: { vi: 'Lập kế hoạch mặc định', en: 'Default Plan' },
-    template: 'Analyze the following project context and create a detailed implementation plan:\n\nProject: {{projectName}}\nFiles: {{files}}\nUser request: {{userMessage}}\n\nProvide a step-by-step plan with file-level changes.',
+    template:
+      'Analyze the following project context and create a detailed implementation plan:\n\nProject: {{projectName}}\nFiles: {{files}}\nUser request: {{userMessage}}\n\nProvide a step-by-step plan with file-level changes.',
     version: '1.0.0',
     variables: ['projectName', 'files', 'userMessage'],
   },
@@ -31,7 +32,8 @@ export const PROMPTS: PromptTemplate[] = [
     id: 'review-default',
     task: 'review',
     name: { vi: 'Review code mặc định', en: 'Default Code Review' },
-    template: 'Review the following code changes:\n\nDiff: {{diff}}\nProject: {{projectName}}\n\nProvide feedback on: correctness, security, performance, readability, and best practices.',
+    template:
+      'Review the following code changes:\n\nDiff: {{diff}}\nProject: {{projectName}}\n\nProvide feedback on: correctness, security, performance, readability, and best practices.',
     version: '1.0.0',
     variables: ['diff', 'projectName'],
   },
@@ -39,7 +41,8 @@ export const PROMPTS: PromptTemplate[] = [
     id: 'chat-default',
     task: 'chat',
     name: { vi: 'Chat repo mặc định', en: 'Default Repo Chat' },
-    template: 'You are an AI coding assistant working on the project "{{projectName}}". Answer the following question based on the project context:\n\n{{userMessage}}',
+    template:
+      'You are an AI coding assistant working on the project "{{projectName}}". Answer the following question based on the project context:\n\n{{userMessage}}',
     version: '1.0.0',
     variables: ['projectName', 'userMessage'],
   },
@@ -55,7 +58,8 @@ export const PROMPTS: PromptTemplate[] = [
     id: 'docs-generate',
     task: 'docs',
     name: { vi: 'Tạo tài liệu', en: 'Generate Documentation' },
-    template: 'Generate documentation for the following code:\n\n{{code}}\n\nInclude: purpose, parameters, return value, examples.',
+    template:
+      'Generate documentation for the following code:\n\n{{code}}\n\nInclude: purpose, parameters, return value, examples.',
     version: '1.0.0',
     variables: ['code'],
   },
@@ -63,7 +67,8 @@ export const PROMPTS: PromptTemplate[] = [
     id: 'release-notes',
     task: 'release',
     name: { vi: 'Ghi chú phát hành', en: 'Release Notes' },
-    template: 'Generate release notes from the following commits:\n\n{{commits}}\n\nGroup by: Features, Fixes, Improvements.',
+    template:
+      'Generate release notes from the following commits:\n\n{{commits}}\n\nGroup by: Features, Fixes, Improvements.',
     version: '1.0.0',
     variables: ['commits'],
   },
@@ -71,7 +76,8 @@ export const PROMPTS: PromptTemplate[] = [
     id: 'test-gen-default',
     task: 'test-gen',
     name: { vi: 'Tạo test mặc định', en: 'Default Test Generation' },
-    template: 'Generate test cases for the following code:\n\n{{code}}\n\nInclude: unit tests, edge cases, and error handling.',
+    template:
+      'Generate test cases for the following code:\n\n{{code}}\n\nInclude: unit tests, edge cases, and error handling.',
     version: '1.0.0',
     variables: ['code'],
   },
@@ -79,7 +85,8 @@ export const PROMPTS: PromptTemplate[] = [
     id: 'patch-explain',
     task: 'patch-explain',
     name: { vi: 'Giải thích patch', en: 'Patch Explanation' },
-    template: 'Explain the following diff in plain language:\n\n{{diff}}\n\nDescribe: what changed, why it matters, and any risks.',
+    template:
+      'Explain the following diff in plain language:\n\n{{diff}}\n\nDescribe: what changed, why it matters, and any risks.',
     version: '1.0.0',
     variables: ['diff'],
   },
@@ -87,18 +94,19 @@ export const PROMPTS: PromptTemplate[] = [
     id: 'commit-draft',
     task: 'commit-draft',
     name: { vi: 'Soạn commit', en: 'Commit Message Draft' },
-    template: 'Generate a conventional commit message for the following changes:\n\n{{diff}}\n\nFormat: type(scope): description\n\nBody: explain what and why.',
+    template:
+      'Generate a conventional commit message for the following changes:\n\n{{diff}}\n\nFormat: type(scope): description\n\nBody: explain what and why.',
     version: '1.0.0',
     variables: ['diff'],
   },
 ];
 
 export function getPrompt(id: PromptId): PromptTemplate | undefined {
-  return PROMPTS.find(p => p.id === id);
+  return PROMPTS.find((p) => p.id === id);
 }
 
 export function getPromptsByTask(task: string): PromptTemplate[] {
-  return PROMPTS.filter(p => p.task === task);
+  return PROMPTS.filter((p) => p.task === task);
 }
 
 export function renderPrompt(prompt: PromptTemplate, variables: Record<string, string>): string {

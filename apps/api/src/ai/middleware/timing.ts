@@ -1,4 +1,4 @@
-import type { Context, MiddlewareHandler } from 'hono';
+import type { MiddlewareHandler } from 'hono';
 
 export const timingMiddleware: MiddlewareHandler = async (c, next) => {
   const start = Date.now();

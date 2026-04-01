@@ -7,8 +7,34 @@ export interface CommandDefinition {
 }
 
 export const COMMAND_TIERS: Record<CommandTier, string[]> = {
-  safe: ['ls', 'cat', 'grep', 'find', 'git status', 'git diff', 'git log', 'pwd', 'echo', 'head', 'tail', 'wc', 'tree'],
-  review: ['npm install', 'pnpm install', 'yarn install', 'git add', 'git commit', 'git push', 'git pull', 'mkdir', 'cp', 'mv', 'touch'],
+  safe: [
+    'ls',
+    'cat',
+    'grep',
+    'find',
+    'git status',
+    'git diff',
+    'git log',
+    'pwd',
+    'echo',
+    'head',
+    'tail',
+    'wc',
+    'tree',
+  ],
+  review: [
+    'npm install',
+    'pnpm install',
+    'yarn install',
+    'git add',
+    'git commit',
+    'git push',
+    'git pull',
+    'mkdir',
+    'cp',
+    'mv',
+    'touch',
+  ],
   dangerous: ['rm -rf', 'sudo', 'curl | bash', 'wget | sh', 'dd', 'mkfs', 'chmod 777', 'chown'],
 };
 

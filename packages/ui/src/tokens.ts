@@ -2,25 +2,25 @@ export type ThemeMode = 'light' | 'dark' | 'system';
 
 export interface DesignTokens {
   colors: {
-    bg: { primary: string; secondary: string; tertiary: string; };
-    fg: { primary: string; secondary: string; muted: string; };
-    border: { default: string; focus: string; error: string; };
-    accent: { primary: string; hover: string; active: string; };
+    bg: { primary: string; secondary: string; tertiary: string };
+    fg: { primary: string; secondary: string; muted: string };
+    border: { default: string; focus: string; error: string };
+    accent: { primary: string; hover: string; active: string };
     success: string;
     warning: string;
     error: string;
     info: string;
   };
-  spacing: { xs: string; sm: string; md: string; lg: string; xl: string; xxl: string; };
+  spacing: { xs: string; sm: string; md: string; lg: string; xl: string; xxl: string };
   typography: {
     fontFamily: string;
     fontFamilyMono: string;
-    sizes: { xs: string; sm: string; md: string; lg: string; xl: string; xxl: string; };
-    weights: { normal: number; medium: number; semibold: number; bold: number; };
+    sizes: { xs: string; sm: string; md: string; lg: string; xl: string; xxl: string };
+    weights: { normal: number; medium: number; semibold: number; bold: number };
   };
-  radius: { sm: string; md: string; lg: string; full: string; };
-  shadows: { sm: string; md: string; lg: string; };
-  transitions: { fast: string; normal: string; slow: string; };
+  radius: { sm: string; md: string; lg: string; full: string };
+  shadows: { sm: string; md: string; lg: string };
+  transitions: { fast: string; normal: string; slow: string };
 }
 
 export const tokens: DesignTokens = {

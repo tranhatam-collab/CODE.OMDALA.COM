@@ -6,7 +6,11 @@ export interface TrustScore {
   factors: { name: string; impact: number }[];
 }
 
-export function evaluateTrust(toolLevel: TrustLevel, responseData: unknown, providerHealth: 'healthy' | 'degraded' | 'down'): TrustScore {
+export function evaluateTrust(
+  toolLevel: TrustLevel,
+  responseData: unknown,
+  providerHealth: 'healthy' | 'degraded' | 'down',
+): TrustScore {
   let confidence = 100;
   const factors = [];
 

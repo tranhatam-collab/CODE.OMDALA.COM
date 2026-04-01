@@ -1,6 +1,6 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron';
-import { join } from 'path';
-import { existsSync, readdirSync, statSync } from 'fs';
+import { existsSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -57,8 +57,8 @@ ipcMain.handle('fs:listDir', async (_event, folderPath: string) => {
   try {
     const entries = readdirSync(folderPath, { withFileTypes: true });
     return entries
-      .filter(e => !e.name.startsWith('.') || e.name === '.git')
-      .map(e => ({ name: e.name, isDirectory: e.isDirectory(), path: join(folderPath, e.name) }));
+      .filter((e) => !e.name.startsWith('.') || e.name === '.git')
+      .map((e) => ({ name: e.name, isDirectory: e.isDirectory(), path: join(folderPath, e.name) }));
   } catch {
     return [];
   }
@@ -67,7 +67,7 @@ ipcMain.handle('fs:listDir', async (_event, folderPath: string) => {
 // IPC: Read file content
 ipcMain.handle('fs:readFile', async (_event, filePath: string) => {
   try {
-    const { readFileSync } = await import('fs');
+    const { readFileSync } = await import('node:fs');
     return readFileSync(filePath, 'utf-8');
   } catch (e) {
     return { error: e instanceof Error ? e.message : 'Failed to read file' };

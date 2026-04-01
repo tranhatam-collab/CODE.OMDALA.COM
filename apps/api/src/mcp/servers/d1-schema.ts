@@ -5,8 +5,6 @@ export interface D1SchemaMcpConfig {
 }
 
 export class D1SchemaMcpServer {
-  private config: D1SchemaMcpConfig;
-
   constructor(config: D1SchemaMcpConfig) {
     this.config = config;
   }
@@ -21,22 +19,28 @@ export class D1SchemaMcpServer {
   }
 
   async validateMigration(sql: string): Promise<{ safe: boolean; warnings: string[] }> {
-    if (sql.toLowerCase().includes('drop table')) return { safe: false, warnings: ['Destructive DROP TABLE detected'] };
+    if (sql.toLowerCase().includes('drop table'))
+      return { safe: false, warnings: ['Destructive DROP TABLE detected'] };
     return { safe: true, warnings: [] };
   }
 
-  async applyMigration(sql: string): Promise<{ success: boolean; rowsAffected: number }> {
+  async applyMigration(_sql: string): Promise<{ success: boolean; rowsAffected: number }> {
     // CRITICAL: Requires strict approval
     return { success: true, rowsAffected: 1 };
   }
 
-  async rollbackMigration(version: string): Promise<{ success: boolean; rowsAffected: number }> {
+  async rollbackMigration(_version: string): Promise<{ success: boolean; rowsAffected: number }> {
     // CRITICAL: Requires admin approval
     return { success: true, rowsAffected: 1 };
   }
 
   async querySchema(sql: string): Promise<any[]> {
-    if (sql.toLowerCase().includes('drop') || sql.toLowerCase().includes('delete') || sql.toLowerCase().includes('update') || sql.toLowerCase().includes('insert')) {
+    if (
+      sql.toLowerCase().includes('drop') ||
+      sql.toLowerCase().includes('delete') ||
+      sql.toLowerCase().includes('update') ||
+      sql.toLowerCase().includes('insert')
+    ) {
       throw new Error('Only read-only queries allowed in querySchema');
     }
     return [{ table_name: 'workspaces' }];

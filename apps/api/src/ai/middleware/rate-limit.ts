@@ -1,8 +1,11 @@
-import type { Context, MiddlewareHandler } from 'hono';
+import type { MiddlewareHandler } from 'hono';
 
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 
-export const rateLimitMiddleware = (limit: number = 60, windowMs: number = 60000): MiddlewareHandler => {
+export const rateLimitMiddleware = (
+  limit: number = 60,
+  windowMs: number = 60000,
+): MiddlewareHandler => {
   return async (c, next) => {
     const key = c.req.header('x-forwarded-for') || c.req.header('cf-connecting-ip') || 'unknown';
     const now = Date.now();
@@ -13,7 +16,17 @@ export const rateLimitMiddleware = (limit: number = 60, windowMs: number = 60000
     } else {
       entry.count++;
       if (entry.count > limit) {
-        return c.json({ error: { code: 'RATE_LIMITED', message: 'Too many requests', retryable: true, suggestion: 'Wait before retrying' } }, 429);
+        return c.json(
+          {
+            error: {
+              code: 'RATE_LIMITED',
+              message: 'Too many requests',
+              retryable: true,
+              suggestion: 'Wait before retrying',
+            },
+          },
+          429,
+        );
       }
     }
 

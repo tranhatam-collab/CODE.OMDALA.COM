@@ -1,11 +1,17 @@
-import { redact, DEFAULT_PATTERNS } from '@omcode/schemas';
+import { DEFAULT_PATTERNS, redact } from '@omcode/schemas';
 
 export function redactInput(input: string): { sanitized: string; redactedCount: number } {
   let count = 0;
-  const sanitized = redact(input, DEFAULT_PATTERNS.map(p => ({
-    ...p,
-    replace: (match: string) => { count++; return p.replacement; }
-  })));
+  const sanitized = redact(
+    input,
+    DEFAULT_PATTERNS.map((p) => ({
+      ...p,
+      replace: (_match: string) => {
+        count++;
+        return p.replacement;
+      },
+    })),
+  );
   return { sanitized, redactedCount: count };
 }
 

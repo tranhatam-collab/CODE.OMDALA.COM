@@ -3,7 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "exports": { ".": "./src/index.ts", "./registry": "./src/registry.ts" },
-  "scripts": { "typecheck": "tsc --noEmit", "lint": "biome check ." },
-  "devDependencies": { "typescript": "^5.7.0" }
+  "exports": {
+    ".": "./src/index.ts",
+    "./registry": "./src/registry.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check ."
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
 }
