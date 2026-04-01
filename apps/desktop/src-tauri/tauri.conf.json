@@ -1,7 +1,8 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "productName": "OMCODE",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0",
+  "identifier": "com.omdala.code",
   "build": {
     "beforeDevCommand": "echo 'Vite dev running'",
     "beforeBuildCommand": "pnpm build:renderer",
@@ -17,8 +18,7 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ],
-    "identifier": "com.omdala.code"
+    ]
   },
   "app": {
     "windows": [
@@ -29,9 +29,6 @@
         "title": "OMCODE",
         "width": 800
       }
-    ],
-    "security": {
-      "csp": null
-    }
+    ]
   }
 }
