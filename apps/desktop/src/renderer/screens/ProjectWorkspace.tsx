@@ -3,6 +3,7 @@ import { t } from '@omcode/i18n';
 import type { ProjectInfo } from '../store/types';
 import { CodeEditor } from '../components/CodeEditor';
 import { DiffViewer } from '../components/DiffViewer';
+import { ApprovalUI } from '../components/ApprovalUI';
 import { apiClient } from '../utils/apiClient';
 
 interface Props { locale: 'vi' | 'en'; project: ProjectInfo; onBack: () => void; }
@@ -14,9 +15,9 @@ export default function ProjectWorkspace({ locale, project, onBack }: Props) {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [fileContent, setFileContent] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'files' | 'session' | 'diff'>('files');
+  const [pendingPatch, setPendingPatch] = useState<{ id: string; path: string; content: string } | null>(null);
 
   useEffect(() => {
-    // API-based repo map for context
     apiClient.getRepoMap(project.path).then(setFiles);
   }, [project.path]);
 
@@ -25,6 +26,14 @@ export default function ProjectWorkspace({ locale, project, onBack }: Props) {
     if (typeof window !== 'undefined' && window.electronAPI) {
       const content = await window.electronAPI.readFile(filePath);
       setFileContent(typeof content === 'string' ? content : content.error || '');
+    }
+  };
+
+  const applyPatch = async (id: string, path: string, content: string) => {
+    if (typeof window !== 'undefined' && window.electronAPI) {
+      await window.electronAPI.writeFile(path, content);
+      setPendingPatch(null);
+      handleFileClick(path); // Refresh
     }
   };
 
@@ -52,10 +61,13 @@ export default function ProjectWorkspace({ locale, project, onBack }: Props) {
           ))}
         </aside>
         <main style={{ flex: 1, overflow: 'auto', padding: '16px' }}>
+          {pendingPatch && (
+            <ApprovalUI id={pendingPatch.id} toolName="Apply Patch" payload={{ path: pendingPatch.path }} onApprove={(id) => applyPatch(id, pendingPatch.path, pendingPatch.content)} onReject={() => setPendingPatch(null)} />
+          )}
           {activeTab === 'files' && (
             selectedFile ? <CodeEditor value={fileContent} readOnly /> : <p style={{ color: '#8b8ba7' }}>Select a file to view</p>
           )}
-          {activeTab === 'session' && <SessionPanel locale={locale} project={project} />}
+          {activeTab === 'session' && <SessionPanel locale={locale} project={project} onSuggestEdit={(path, content) => setPendingPatch({ id: crypto.randomUUID(), path, content })} />}
           {activeTab === 'diff' && <DiffViewer oldValue={fileContent} newValue={fileContent} />}
         </main>
       </div>
@@ -63,7 +75,7 @@ export default function ProjectWorkspace({ locale, project, onBack }: Props) {
   );
 }
 
-function SessionPanel({ locale, project }: { locale: 'vi' | 'en'; project: ProjectInfo }) {
+function SessionPanel({ locale, project, onSuggestEdit }: { locale: 'vi' | 'en'; project: ProjectInfo; onSuggestEdit: (path: string, content: string) => void }) {
   const [messages, setMessages] = useState<Array<{ role: string; content: string }>>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -77,6 +89,10 @@ function SessionPanel({ locale, project }: { locale: 'vi' | 'en'; project: Proje
     try {
       const data = await apiClient.chat(project.id, input);
       setMessages(prev => [...prev, { role: 'assistant', content: data.data?.content || 'No response' }]);
+      // Giả lập model gợi ý sửa file (tích hợp thực tế ở đây)
+      if (input.includes('fix')) {
+        onSuggestEdit(project.path + '/index.ts', 'Updated content');
+      }
     } catch {
       setMessages(prev => [...prev, { role: 'assistant', content: 'Error: Cannot connect to API' }]);
     }

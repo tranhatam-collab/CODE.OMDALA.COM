@@ -3,6 +3,7 @@ export interface ElectronAPI {
   isGitRepo: (path: string) => Promise<boolean>;
   listDir: (path: string) => Promise<Array<{ name: string; isDirectory: boolean; path: string }>>;
   readFile: (path: string) => Promise<string | { error: string }>;
+  writeFile: (path: string, content: string) => Promise<void>;
   runCommand: (command: string) => Promise<string>;
   getVersion: () => Promise<string>;
   getPlatform: () => Promise<{
