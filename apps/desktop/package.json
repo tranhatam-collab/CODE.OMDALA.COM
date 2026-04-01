@@ -16,10 +16,10 @@
     "@omcode/i18n": "workspace:*",
     "@omcode/schemas": "workspace:*",
     "@omcode/ui": "workspace:*",
-    "@tauri-apps/api": "^2.0.0",
-    "@tauri-apps/plugin-dialog": "^2.0.0",
-    "@tauri-apps/plugin-fs": "^2.0.0",
-    "@tauri-apps/plugin-shell": "^2.0.0",
+    "@tauri-apps/api": "^2.1.0",
+    "@tauri-apps/plugin-dialog": "^2.1.0",
+    "@tauri-apps/plugin-fs": "^2.1.0",
+    "@tauri-apps/plugin-shell": "^2.1.0",
     "diff": "^8.0.4",
     "prismjs": "^1.30.0",
     "react": "^19.0.0",
@@ -27,7 +27,7 @@
     "react-simple-code-editor": "^0.14.1"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^2.0.0",
+    "@tauri-apps/cli": "^2.1.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.0",
